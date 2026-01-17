@@ -1,14 +1,18 @@
 require("dotenv").config();
-const connectDB = require("./config/db");
+
 const express = require("express");
+const connectDB = require("./config/db");
+
 const app = express();
+// middleware
+app.use(express.json());
 const userRoutes = require("./routes/userRoutes");
+app.use("/api/users", userRoutes);
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/auth", authRoutes);
 
 //connect to database
 connectDB();
-// middleware
-app.use("/api/users", userRoutes);
-app.use(express.json());
 
 // test route
 app.get("/", (req, res) => {
@@ -19,4 +23,5 @@ const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
