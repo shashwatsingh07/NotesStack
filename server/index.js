@@ -1,10 +1,22 @@
+require("dotenv").config();
+const connectDB = require("./config/db");
 const express = require("express");
 const app = express();
+const userRoutes = require("./routes/userRoutes");
 
+//connect to database
+connectDB();
+// middleware
+app.use("/api/users", userRoutes);
+app.use(express.json());
+
+// test route
 app.get("/", (req, res) => {
-  res.send("Notes Marketplace Backend Running");
+  res.json({ message: "API is running" });
 });
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
+
