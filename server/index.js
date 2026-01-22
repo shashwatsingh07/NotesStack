@@ -10,6 +10,8 @@ const userRoutes = require("./routes/userRoutes");
 app.use("/api/users", userRoutes);
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
+const noteRoutes = require("./routes/noteRoutes");
+app.use("/api/notes", noteRoutes);
 
 //connect to database
 connectDB();

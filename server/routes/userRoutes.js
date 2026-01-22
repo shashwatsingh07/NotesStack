@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const { protect, sellerOnly } = require("../middleware/authMiddleware");
 
-// test user route
-router.get("/test", (req, res) => {
-  res.json({ message: "User route working" });
+router.get("/profile", protect, (req, res) => {
+  res.json(req.user);
+});
+router.get("/seller-dashboard", protect, sellerOnly, (req, res) => {
+  res.json({ message: "Welcome Seller" });
 });
 
 module.exports = router;
